@@ -123,7 +123,7 @@ const options = {
             diversificationScore: { type: "number" },
             recommendations: {
               type: "array",
-              items: { type: "string" }
+              items: { type: "string" },
             },
             calculatedAt: { type: "string", format: "date-time" },
           },
@@ -158,14 +158,14 @@ const options = {
                     properties: {
                       status: { type: "string" },
                       timestamp: { type: "string" },
-                      environment: { type: "string" }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+                      environment: { type: "string" },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
 
       "/api/market/assets": {
@@ -180,13 +180,13 @@ const options = {
                 "application/json": {
                   schema: {
                     type: "array",
-                    items: { $ref: "#/components/schemas/Asset" }
-                  }
-                }
-              }
-            }
-          }
-        }
+                    items: { $ref: "#/components/schemas/Asset" },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/market/data/{symbol}": {
         get: {
@@ -199,28 +199,28 @@ const options = {
               in: "path",
               required: true,
               schema: { type: "string" },
-              description: "Símbolo del activo (ej: AAPL)"
-            }
+              description: "Símbolo del activo (ej: AAPL)",
+            },
           ],
           responses: {
             200: {
               description: "Datos de mercado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/MarketData" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/MarketData" },
+                },
+              },
             },
             404: {
               description: "Activo no encontrado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/trading/buy": {
         post: {
@@ -232,9 +232,9 @@ const options = {
             required: true,
             content: {
               "application/json": {
-                schema: { $ref: "#/components/schemas/TradeRequest" }
-              }
-            }
+                schema: { $ref: "#/components/schemas/TradeRequest" },
+              },
+            },
           },
           responses: {
             201: {
@@ -245,30 +245,30 @@ const options = {
                     type: "object",
                     properties: {
                       message: { type: "string" },
-                      transaction: { $ref: "#/components/schemas/Transaction" }
-                    }
-                  }
-                }
-              }
+                      transaction: { $ref: "#/components/schemas/Transaction" },
+                    },
+                  },
+                },
+              },
             },
             400: {
               description: "Datos inválidos",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/trading/sell": {
         post: {
@@ -280,9 +280,9 @@ const options = {
             required: true,
             content: {
               "application/json": {
-                schema: { $ref: "#/components/schemas/TradeRequest" }
-              }
-            }
+                schema: { $ref: "#/components/schemas/TradeRequest" },
+              },
+            },
           },
           responses: {
             201: {
@@ -293,30 +293,30 @@ const options = {
                     type: "object",
                     properties: {
                       message: { type: "string" },
-                      transaction: { $ref: "#/components/schemas/Transaction" }
-                    }
-                  }
-                }
-              }
+                      transaction: { $ref: "#/components/schemas/Transaction" },
+                    },
+                  },
+                },
+              },
             },
             400: {
               description: "Datos inválidos o fondos insuficientes",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/portfolio": {
         get: {
@@ -329,20 +329,20 @@ const options = {
               description: "Portafolio del usuario",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Portfolio" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/Portfolio" },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/auth/validate": {
         get: {
@@ -359,22 +359,22 @@ const options = {
                     type: "object",
                     properties: {
                       message: { type: "string" },
-                      user: { $ref: "#/components/schemas/User" }
-                    }
-                  }
-                }
-              }
+                      user: { $ref: "#/components/schemas/User" },
+                    },
+                  },
+                },
+              },
             },
             401: {
               description: "API Key inválido",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/users/profile": {
         get: {
@@ -387,19 +387,19 @@ const options = {
               description: "Perfil del usuario",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/User" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/User" },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
         },
         put: {
           summary: "Actualizar perfil del usuario",
@@ -413,31 +413,34 @@ const options = {
                 schema: {
                   type: "object",
                   properties: {
-                    riskTolerance: { type: "string", enum: ["low", "medium", "high"] }
-                  }
-                }
-              }
-            }
+                    riskTolerance: {
+                      type: "string",
+                      enum: ["low", "medium", "high"],
+                    },
+                  },
+                },
+              },
+            },
           },
           responses: {
             200: {
               description: "Perfil actualizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/User" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/User" },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/market/prices": {
         get: {
@@ -452,21 +455,21 @@ const options = {
                 "application/json": {
                   schema: {
                     type: "array",
-                    items: { $ref: "#/components/schemas/MarketData" }
-                  }
-                }
-              }
+                    items: { $ref: "#/components/schemas/MarketData" },
+                  },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/market/prices/{symbol}": {
         get: {
@@ -480,36 +483,36 @@ const options = {
               in: "path",
               required: true,
               schema: { type: "string" },
-              description: "Símbolo del activo (ej: AAPL)"
-            }
+              description: "Símbolo del activo (ej: AAPL)",
+            },
           ],
           responses: {
             200: {
               description: "Precio del activo",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/MarketData" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/MarketData" },
+                },
+              },
             },
             404: {
               description: "Activo no encontrado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/trading/history": {
         get: {
@@ -524,21 +527,21 @@ const options = {
                 "application/json": {
                   schema: {
                     type: "array",
-                    items: { $ref: "#/components/schemas/Transaction" }
-                  }
-                }
-              }
+                    items: { $ref: "#/components/schemas/Transaction" },
+                  },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/portfolio/performance": {
         get: {
@@ -558,27 +561,28 @@ const options = {
                       percentageReturn: { type: "number" },
                       bestPerformer: { type: "string" },
                       worstPerformer: { type: "string" },
-                      dailyChange: { type: "number" }
-                    }
-                  }
-                }
-              }
+                      dailyChange: { type: "number" },
+                    },
+                  },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/analysis/risk": {
         get: {
           summary: "Análisis de riesgo del portafolio",
-          description: "Obtiene un análisis de riesgo del portafolio del usuario",
+          description:
+            "Obtiene un análisis de riesgo del portafolio del usuario",
           tags: ["Analysis"],
           security: [{ ApiKeyAuth: [] }],
           responses: {
@@ -586,20 +590,20 @@ const options = {
               description: "Análisis de riesgo",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/RiskAnalysis" }
-                }
-              }
+                  schema: { $ref: "#/components/schemas/RiskAnalysis" },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
       },
       "/api/analysis/recommendations": {
         get: {
@@ -617,26 +621,26 @@ const options = {
                     properties: {
                       recommendations: {
                         type: "array",
-                        items: { type: "string" }
+                        items: { type: "string" },
                       },
-                      generatedAt: { type: "string", format: "date-time" }
-                    }
-                  }
-                }
-              }
+                      generatedAt: { type: "string", format: "date-time" },
+                    },
+                  },
+                },
+              },
             },
             401: {
               description: "No autorizado",
               content: {
                 "application/json": {
-                  schema: { $ref: "#/components/schemas/Error" }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+                  schema: { $ref: "#/components/schemas/Error" },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   apis: ["./src/routes/*.ts"], // Archivos donde están las definiciones de rutas
 };

@@ -1,13 +1,11 @@
 // Almacenamiento en memoria
-import {
-  User,
-  Asset,
-  Transaction,
-  Order,
-  Portfolio,
-  MarketData,
-} from "../models/types";
+import { Order } from "../models/order";
+import { Portfolio } from "../models/portfolio";
+import { Transaction } from "../models/transaction";
+import { Asset } from "../models/asset";
+import { User } from "../models/user";
 import { config } from "../config/config";
+import { MarketData } from "../models/market-data";
 
 // Base de datos simulada en memoria (se pierde al reiniciar)
 class InMemoryStorage {

@@ -1,12 +1,10 @@
 // Servicios de trading
-import {
-  Transaction,
-  Order,
-  Asset,
-  User,
-  Portfolio,
-  PortfolioHolding,
-} from "../models/types";
+import { Order } from "../models/order";
+import { Portfolio } from "../models/portfolio";
+import { PortfolioHolding } from "../models/portfolio-holding";
+import { User } from "../models/user";
+import { Asset } from "../models/asset";
+import { Transaction } from "../models/transaction";
 import { storage } from "../utils/storage";
 import { config } from "../config/config";
 
