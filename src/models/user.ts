@@ -1,10 +1,12 @@
+import { RISK } from "./types";
+
 export class User {
   id: string;
   username: string;
   email: string;
   apiKey: string;
   balance: number;
-  riskTolerance: "low" | "medium" | "high";
+  riskTolerance: RISK;
   createdAt: Date;
 
   constructor(
@@ -13,7 +15,7 @@ export class User {
     email: string,
     apiKey: string,
     balance: number,
-    riskTolerance: "low" | "medium" | "high"
+    riskTolerance: RISK
   ) {
     this.id = id;
     this.username = username;
