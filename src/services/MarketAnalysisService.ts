@@ -4,6 +4,7 @@ import { Portfolio } from "../models/portfolio";
 import { Asset } from "../models/asset";
 import { storage } from "../utils/storage";
 import { RiskAnalysis } from "../models/risk-analysis";
+import { RISK } from "../models/types";
 
 export class MarketAnalysisService {
   // Análisis de riesgo del portafolio
@@ -20,13 +21,13 @@ export class MarketAnalysisService {
     const volatilityScore = this.calculateVolatilityScore(portfolio);
 
     // Determinar nivel de riesgo general
-    let portfolioRisk: "low" | "medium" | "high";
+    let portfolioRisk: RISK;
     if (volatilityScore < 30 && diversificationScore > 70) {
-      portfolioRisk = "low";
+      portfolioRisk = RISK.LOW;
     } else if (volatilityScore < 60 && diversificationScore > 40) {
-      portfolioRisk = "medium";
+      portfolioRisk = RISK.MEDIUM;
     } else {
-      portfolioRisk = "high";
+      portfolioRisk = RISK.HIGH;
     }
 
     // Generar recomendaciones básicas
@@ -118,7 +119,7 @@ export class MarketAnalysisService {
   private generateRiskRecommendations(
     diversificationScore: number,
     volatilityScore: number,
-    riskLevel: string
+    riskLevel: RISK
   ): string[] {
     const recommendations: string[] = [];
 
@@ -134,7 +135,7 @@ export class MarketAnalysisService {
       );
     }
 
-    if (riskLevel === "high") {
+    if (riskLevel === RISK.HIGH) {
       recommendations.push(
         "Nivel de riesgo alto detectado, revisa tu estrategia de inversión"
       );
@@ -231,20 +232,20 @@ export class MarketAnalysisService {
         let priority = 0;
 
         if (
-          user.riskTolerance === "low" &&
+          user.riskTolerance === RISK.LOW &&
           this.getAssetVolatility(asset.symbol) < 50
         ) {
           recommendation =
             "Activo de bajo riesgo recomendado para tu perfil conservador";
           priority = 1;
         } else if (
-          user.riskTolerance === "high" &&
+          user.riskTolerance === RISK.HIGH &&
           this.getAssetVolatility(asset.symbol) > 60
         ) {
           recommendation =
             "Activo de alto crecimiento potencial para tu perfil agresivo";
           priority = 2;
-        } else if (user.riskTolerance === "medium") {
+        } else if (user.riskTolerance === RISK.MEDIUM) {
           recommendation = "Activo balanceado adecuado para tu perfil moderado";
           priority = 1;
         }

@@ -1,5 +1,6 @@
 // Configuración de Swagger para documentación de la API
 import swaggerJsdoc from "swagger-jsdoc";
+import { RISK } from "../models/types";
 
 const options = {
   definition: {
@@ -36,7 +37,7 @@ const options = {
             username: { type: "string" },
             email: { type: "string" },
             balance: { type: "number" },
-            riskTolerance: { type: "string", enum: ["low", "medium", "high"] },
+            riskTolerance: { type: "string", RISK },
             createdAt: { type: "string", format: "date-time" },
           },
         },
@@ -119,7 +120,7 @@ const options = {
           type: "object",
           properties: {
             userId: { type: "string" },
-            portfolioRisk: { type: "string", enum: ["low", "medium", "high"] },
+            portfolioRisk: { type: "string", RISK },
             diversificationScore: { type: "number" },
             recommendations: {
               type: "array",
@@ -415,7 +416,7 @@ const options = {
                   properties: {
                     riskTolerance: {
                       type: "string",
-                      enum: ["low", "medium", "high"],
+                      RISK,
                     },
                   },
                 },

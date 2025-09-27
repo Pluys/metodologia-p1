@@ -6,6 +6,7 @@ import { Asset } from "../models/asset";
 import { User } from "../models/user";
 import { config } from "../config/config";
 import { MarketData } from "../models/market-data";
+import { RISK } from "../models/types";
 
 // Base de datos simulada en memoria (se pierde al reiniciar)
 class InMemoryStorage {
@@ -30,7 +31,7 @@ class InMemoryStorage {
         "demo@example.com",
         "demo-key-123",
         10000.0,
-        "medium"
+        RISK.MEDIUM
       ),
       new User(
         "admin_user",
@@ -38,7 +39,7 @@ class InMemoryStorage {
         "admin@example.com",
         "admin-key-456",
         50000.0,
-        "high"
+        RISK.HIGH
       ),
       new User(
         "trader_user",
@@ -46,7 +47,7 @@ class InMemoryStorage {
         "trader@example.com",
         "trader-key-789",
         25000.0,
-        "low"
+        RISK.LOW
       ),
     ];
 
