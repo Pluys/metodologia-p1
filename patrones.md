@@ -22,3 +22,7 @@ El patrón **Facade** proporciona una interfaz simplificada para un conjunto de 
 
 ## STRATEGY
 El patrón **Strategy** define una familia de algoritmos, encapsula cada uno y los hace intercambiables. Permite seleccionar el algoritmo adecuado en tiempo de ejecución sin modificar el cliente. Es útil para cumplir el principio de abierto/cerrado y para evitar condicionales complejos relacionados con la selección de comportamientos.
+
+## ADAPTER
+El patrón Adapter permite que dos interfaces incompatibles colaboren entre sí, actuando como un traductor entre ellas. Su objetivo es convertir la interfaz de una clase existente en otra interfaz que el cliente espera. Es especialmente útil cuando se desea reutilizar clases existentes sin modificar su código, integrándolas en sistemas con diferentes interfaces. El Adapter encapsula la lógica de conversión, facilitando la interoperabilidad y promoviendo el principio de reutilización de código.
+
