@@ -1,20 +1,21 @@
+import { RISK } from "./types";
+
 export class RiskAnalysis {
   userId: string;
-  portfolioRisk: "low" | "medium" | "high";
+  portfolioRisk: RISK;
   diversificationScore: number;
   recommendations: string[];
   calculatedAt: Date;
 
   constructor(userId: string) {
     this.userId = userId;
-    this.portfolioRisk = "medium";
-    this.diversificationScore = 0;
+    (this.portfolioRisk = RISK.MEDIUM), (this.diversificationScore = 0);
     this.recommendations = [];
     this.calculatedAt = new Date();
   }
 
   updateRisk(
-    risk: "low" | "medium" | "high",
+    risk: RISK,
     diversificationScore: number,
     recommendations: string[]
   ): void {

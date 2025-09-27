@@ -1,18 +1,20 @@
+import { TRANSACTION_STATUS, TRANSACTION_TYPE } from "./types";
+
 export class Transaction {
   id: string;
   userId: string;
-  type: "buy" | "sell";
+  type: TRANSACTION_TYPE;
   symbol: string;
   quantity: number;
   price: number;
   timestamp: Date;
   fees: number;
-  status: "pending" | "completed" | "failed";
+  status: TRANSACTION_STATUS;
 
   constructor(
     id: string,
     userId: string,
-    type: "buy" | "sell",
+    type: TRANSACTION_TYPE,
     symbol: string,
     quantity: number,
     price: number,
@@ -26,15 +28,15 @@ export class Transaction {
     this.price = price;
     this.fees = fees;
     this.timestamp = new Date();
-    this.status = "pending";
+    this.status = TRANSACTION_STATUS.PENDING;
   }
 
   complete(): void {
-    this.status = "completed";
+    this.status = TRANSACTION_STATUS.COMPLETED;
   }
 
   fail(): void {
-    this.status = "failed";
+    this.status = TRANSACTION_STATUS.FAILED;
   }
 
   getTotalAmount(): number {
