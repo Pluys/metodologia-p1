@@ -18,3 +18,16 @@
 **Volatility factor** El volatility factor es un parámetro que controla cuánto pueden variar los precios de los activos en cada actualización de la simulación de mercado. Un valor más alto significa que los precios pueden cambiar más rápidamente y de forma más impredecible, simulando un mercado más volátil. .
 
 **CORS** : cors (Cross-Origin Resource Sharing) es un mecanismo de seguridad que permite controlar qué dominios pueden acceder a recursos de tu servidor desde navegadores web. Por defecto, los navegadores bloquean solicitudes hechas desde un origen diferente al del servidor. Usando CORS puedes permitir o restringir estos accesos configurando encabezados HTTP apropiados. En Node.js, el paquete `cors` facilita esta configuración en aplicaciones Express.
+
+
+
+**SMA**: SMA significa Simple Moving Average (Media Móvil Simple). Es un indicador técnico utilizado en análisis de mercados financieros para suavizar los precios de un activo durante un período determinado, mostrando la tendencia general eliminando fluctuaciones cortas. Se calcula promediando los precios de cierre de un activo durante un número específico de días o periodos.
+
+**SIGTERM**: SIGTERM es una señal del sistema operativo utilizada para solicitar la terminación de un proceso de forma controlada. Cuando un proceso recibe SIGTERM, puede ejecutar tareas de limpieza antes de finalizar, como cerrar conexiones o guardar datos. Es comúnmente usada para apagar servidores o aplicaciones de manera segura.
+
+**SIGINIT**: SIGINT es una señal del sistema operativo que se envía a un proceso para interrumpirlo. Normalmente se genera cuando el usuario presiona Ctrl+C en la terminal. Al recibir SIGINT, el proceso puede ejecutar tareas de limpieza antes de finalizar, permitiendo un cierre controlado.
+
+
+**Health check** Un health check es una verificación rápida que realiza una aplicación para indicar si está funcionando correctamente. Normalmente responde con un estado como "OK" y detalles básicos, permitiendo a sistemas de monitoreo saber si el servicio está activo y disponible.
+
+
