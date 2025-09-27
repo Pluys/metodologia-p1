@@ -8,6 +8,11 @@ import { config } from "../config/config";
 import { MarketData } from "../models/market-data";
 import { RISK } from "../models/types";
 
+
+
+
+
+
 // Base de datos simulada en memoria (se pierde al reiniciar)
 class InMemoryStorage {
   private users: Map<string, User> = new Map();

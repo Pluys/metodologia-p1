@@ -26,3 +26,10 @@ El patrón **Strategy** define una familia de algoritmos, encapsula cada uno y l
 ## ADAPTER
 El patrón Adapter permite que dos interfaces incompatibles colaboren entre sí, actuando como un traductor entre ellas. Su objetivo es convertir la interfaz de una clase existente en otra interfaz que el cliente espera. Es especialmente útil cuando se desea reutilizar clases existentes sin modificar su código, integrándolas en sistemas con diferentes interfaces. El Adapter encapsula la lógica de conversión, facilitando la interoperabilidad y promoviendo el principio de reutilización de código.
 
+## PATRONES QUE PODEMOS USAR EN ESTE PROYECTO
+
+**SINGLETON* ----> STORAGE
+*BUILDER* ---> TIPO DE USUARIOS
+*STRATEGY* ---> EN LOS RISK
+*OBSERVER* ---> NOTIFICA A LOS USUARIOS LOS CAMBIOS DEL MERCADO [funcionalidad extra]
+*FACADE* ---> ENCAPSULAR LOGICA EN FUNCIONES QUE NO LE CORRESPONDE

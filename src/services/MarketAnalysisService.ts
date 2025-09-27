@@ -7,6 +7,9 @@ import { RiskAnalysis } from "../models/risk-analysis";
 import { RISK } from "../models/types";
 
 export class MarketAnalysisService {
+
+
+  
   // Análisis de riesgo del portafolio
   analyzePortfolioRisk(userId: string): RiskAnalysis {
     const portfolio = storage.getPortfolioByUserId(userId);
