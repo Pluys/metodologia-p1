@@ -1,5 +1,6 @@
 // Configuración de Swagger para documentación de la API
 import swaggerJsdoc from "swagger-jsdoc";
+import { RISK, TRANSACTION_STATUS, TRANSACTION_TYPE } from "../models/TYPES";
 
 const options = {
   definition: {
@@ -36,7 +37,7 @@ const options = {
             username: { type: "string" },
             email: { type: "string" },
             balance: { type: "number" },
-            riskTolerance: { type: "string", enum: ["low", "medium", "high"] },
+            riskTolerance: { type: "string", enum: [...Object.values(RISK)] },
             createdAt: { type: "string", format: "date-time" },
           },
         },
@@ -65,7 +66,10 @@ const options = {
           type: "object",
           properties: {
             id: { type: "string" },
-            type: { type: "string", enum: ["buy", "sell"] },
+            type: {
+              type: "string",
+              enum: [...Object.values(TRANSACTION_TYPE)],
+            },
             symbol: { type: "string" },
             quantity: { type: "number" },
             price: { type: "number" },
@@ -73,7 +77,7 @@ const options = {
             timestamp: { type: "string", format: "date-time" },
             status: {
               type: "string",
-              enum: ["pending", "completed", "failed"],
+              enum: [...Object.values(TRANSACTION_STATUS)],
             },
           },
         },
@@ -119,7 +123,7 @@ const options = {
           type: "object",
           properties: {
             userId: { type: "string" },
-            portfolioRisk: { type: "string", enum: ["low", "medium", "high"] },
+            portfolioRisk: { type: "string", enum: [Object.values(RISK)] },
             diversificationScore: { type: "number" },
             recommendations: {
               type: "array",
@@ -415,7 +419,7 @@ const options = {
                   properties: {
                     riskTolerance: {
                       type: "string",
-                      enum: ["low", "medium", "high"],
+                      enum: [...Object.values(RISK)],
                     },
                   },
                 },

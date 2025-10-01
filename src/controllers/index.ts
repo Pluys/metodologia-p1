@@ -4,6 +4,7 @@ import { TradingService } from "../services/TradingService";
 import { MarketAnalysisService } from "../services/MarketAnalysisService";
 import { MarketSimulationService } from "../services/MarketSimulationService";
 import { storage } from "../utils/storage";
+import { RISK } from "../models/TYPES";
 
 // Instancias de servicios - Candidato para Dependency Injection
 const tradingService = new TradingService();
@@ -72,8 +73,7 @@ export class UserController {
         });
       }
 
-      if (riskTolerance && !["low", "medium", "high"].includes(riskTolerance)) {
-        /////////////////////////////
+      if (riskTolerance && ![...Object.values(RISK)].includes(riskTolerance)) {
         return res.status(400).json({
           error: "Tolerancia al riesgo inválida",
           message: "La tolerancia al riesgo debe ser: low, medium o high",
