@@ -11,6 +11,8 @@ import { RISK } from "../models/TYPES";
 
 // Base de datos simulada en memoria (se pierde al reiniciar)
 class InMemoryStorage {
+  private static instance: InMemoryStorage;
+
   private users: Map<string, User> = new Map();
   private assets: Map<string, Asset> = new Map();
   private transactions: Transaction[] = [];
@@ -18,8 +20,15 @@ class InMemoryStorage {
   private portfolios: Map<string, Portfolio> = new Map();
   private marketData: Map<string, MarketData> = new Map();
 
-  constructor() {
+  private constructor() {
     this.initializeDefaultData();
+  }
+
+  static getInstance(): InMemoryStorage {
+    if (!InMemoryStorage.instance) {
+      InMemoryStorage.instance = new InMemoryStorage();
+    }
+    return InMemoryStorage.instance;
   }
 
   // Inicializar datos por defecto
@@ -156,5 +165,5 @@ class InMemoryStorage {
   }
 }
 
-// Instancia global de almacenamiento
-export const storage = new InMemoryStorage();
+// Exportar la instancia única (Singleton)
+export const storage = InMemoryStorage.getInstance();
