@@ -1,15 +1,12 @@
 // Servicio de análisis de mercado
 import { MarketData } from "../models/market-data";
-import { Portfolio } from "../models/portfolio";
 import { Asset } from "../models/asset";
-import { storage } from "../utils/storage";
+import { Portfolio } from "../models/portfolio";
 import { RiskAnalysis } from "../models/risk-analysis";
-import { RISK } from "../models/types";
+import { storage } from "../utils/storage";
+import { RISK } from "../models/TYPES";
 
 export class MarketAnalysisService {
-
-
-  
   // Análisis de riesgo del portafolio
   analyzePortfolioRisk(userId: string): RiskAnalysis {
     const portfolio = storage.getPortfolioByUserId(userId);

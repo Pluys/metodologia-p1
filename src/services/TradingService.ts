@@ -1,12 +1,13 @@
 // Servicios de trading
+import { Transaction } from "../models/transaction";
 import { Order } from "../models/order";
+import { Asset } from "../models/asset";
+import { User } from "../models/user";
 import { Portfolio } from "../models/portfolio";
 import { PortfolioHolding } from "../models/portfolio-holding";
-import { User } from "../models/user";
-import { Asset } from "../models/asset";
-import { Transaction } from "../models/transaction";
 import { storage } from "../utils/storage";
 import { config } from "../config/config";
+import { TRANSACTION_TYPE } from "../models/TYPES";
 
 export class TradingService {
   // Ejecutar orden de compra al precio de mercado
@@ -32,7 +33,7 @@ export class TradingService {
 
     // Calcular costo total incluyendo comisiones
     const grossAmount = quantity * executionPrice;
-    const fees = this.calculateFees(grossAmount, "buy");
+    const fees = this.calculateFees(grossAmount, TRANSACTION_TYPE.BUY);
     const totalCost = grossAmount + fees;
 
     // Verificar fondos suficientes
@@ -45,7 +46,7 @@ export class TradingService {
     const transaction = new Transaction(
       transactionId,
       userId,
-      "buy",
+      TRANSACTION_TYPE.BUY,
       symbol,
       quantity,
       executionPrice,
@@ -66,7 +67,7 @@ export class TradingService {
     storage.addTransaction(transaction);
 
     // Simular volatilidad del mercado después de la operación
-    this.simulateMarketImpact(symbol, quantity, "buy");
+    this.simulateMarketImpact(symbol, quantity, TRANSACTION_TYPE.BUY);
 
     return transaction;
   }
@@ -105,7 +106,7 @@ export class TradingService {
 
     // Calcular beneficio bruto y comisiones
     const grossAmount = quantity * executionPrice;
-    const fees = this.calculateFees(grossAmount, "sell");
+    const fees = this.calculateFees(grossAmount, TRANSACTION_TYPE.SELL);
     const netAmount = grossAmount - fees;
 
     // Crear transacción
@@ -113,7 +114,7 @@ export class TradingService {
     const transaction = new Transaction(
       transactionId,
       userId,
-      "sell",
+      TRANSACTION_TYPE.SELL,
       symbol,
       quantity,
       executionPrice,
@@ -134,15 +135,15 @@ export class TradingService {
     storage.addTransaction(transaction);
 
     // Simular volatilidad del mercado después de la operación
-    this.simulateMarketImpact(symbol, quantity, "sell");
+    this.simulateMarketImpact(symbol, quantity, TRANSACTION_TYPE.SELL);
 
     return transaction;
   }
 
   // Cálculo de comisiones
-  private calculateFees(amount: number, type: "buy" | "sell"): number {
+  private calculateFees(amount: number, type: TRANSACTION_TYPE): number {
     const feePercentage =
-      type === "buy"
+      type === TRANSACTION_TYPE.BUY
         ? config.tradingFees.buyFeePercentage
         : config.tradingFees.sellFeePercentage;
     const calculatedFee = amount * feePercentage;
@@ -205,7 +206,7 @@ export class TradingService {
   private simulateMarketImpact(
     symbol: string,
     quantity: number,
-    action: "buy" | "sell"
+    action: TRANSACTION_TYPE
   ): void {
     const marketData = storage.getMarketDataBySymbol(symbol);
     if (!marketData) return;
@@ -215,7 +216,7 @@ export class TradingService {
     const priceImpact = marketData.price * impactFactor * 0.001;
 
     const newPrice =
-      action === "buy"
+      action === TRANSACTION_TYPE.BUY
         ? marketData.price + priceImpact
         : marketData.price - priceImpact;
 

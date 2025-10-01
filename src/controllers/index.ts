@@ -72,7 +72,8 @@ export class UserController {
         });
       }
 
-      if (riskTolerance) {
+      if (riskTolerance && !["low", "medium", "high"].includes(riskTolerance)) {
+        /////////////////////////////
         return res.status(400).json({
           error: "Tolerancia al riesgo inválida",
           message: "La tolerancia al riesgo debe ser: low, medium o high",

@@ -1,4 +1,4 @@
-import { TRANSACTION_STATUS, TRANSACTION_TYPE } from "./types";
+import { TRANSACTION_STATUS, TRANSACTION_TYPE } from "./TYPES";
 
 export class Transaction {
   id: string;

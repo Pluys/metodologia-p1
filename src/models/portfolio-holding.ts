@@ -1,4 +1,4 @@
-cexport class PortfolioHolding {
+export class PortfolioHolding {
   symbol: string;
   quantity: number;
   averagePrice: number;

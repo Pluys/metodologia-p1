@@ -14,3 +14,9 @@ export enum TRANSACTION_STATUS {
   COMPLETED = "completed",
   FAILED = "failed",
 }
+
+export enum ORDER_STATUS {
+  PENDING = "pending",
+  EXECUTED = "executed",
+  CANCELLED = "cancelled",
+}

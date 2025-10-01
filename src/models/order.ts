@@ -1,12 +1,14 @@
+import { ORDER_STATUS, TRANSACTION_TYPE } from "./TYPES";
+
 export class Order {
   id: string;
   userId: string;
   type: "market";
-  action: "buy" | "sell";
+  action: TRANSACTION_TYPE;
   symbol: string;
   quantity: number;
   price?: number;
-  status: "pending" | "executed" | "cancelled";
+  status: ORDER_STATUS;
   createdAt: Date;
   executedAt?: Date;
 
@@ -14,7 +16,7 @@ export class Order {
     id: string,
     userId: string,
     type: "market",
-    action: "buy" | "sell",
+    action: TRANSACTION_TYPE,
     symbol: string,
     quantity: number,
     price?: number
@@ -26,16 +28,16 @@ export class Order {
     this.symbol = symbol;
     this.quantity = quantity;
     this.price = price;
-    this.status = "pending";
+    this.status = ORDER_STATUS.PENDING;
     this.createdAt = new Date();
   }
 
   execute(): void {
-    this.status = "executed";
+    this.status = ORDER_STATUS.EXECUTED;
     this.executedAt = new Date();
   }
 
   cancel(): void {
-    this.status = "cancelled";
+    this.status = ORDER_STATUS.CANCELLED;
   }
 }

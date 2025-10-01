@@ -1,4 +1,4 @@
-import { RISK } from "./types";
+import { RISK } from "./TYPES";
 
 export class User {
   id: string;
