@@ -17,13 +17,13 @@ export class TradingService {
     quantity: number
   ): Promise<Transaction> {
     // Obtener usuario
-    const user = storage.getUserById(userId);
+    const user = storage.users.getUserById(userId);
     if (!user) {
       throw new Error("Usuario no encontrado");
     }
 
     // Obtener activo
-    const asset = storage.getAssetBySymbol(symbol);
+    const asset = storage.assets.getAssetBySymbol(symbol);
     if (!asset) {
       throw new Error("Activo no encontrado");
     }
@@ -58,13 +58,13 @@ export class TradingService {
 
     // Actualizar balance del usuario
     user.deductBalance(totalCost);
-    storage.updateUser(user);
+    storage.users.updateUser(user);
 
     // Actualizar portafolio
     this.updatePortfolioAfterBuy(userId, symbol, quantity, executionPrice);
 
     // Guardar transacción
-    storage.addTransaction(transaction);
+    storage.transactions.addTransaction(transaction);
 
     // Simular volatilidad del mercado después de la operación
     this.simulateMarketImpact(symbol, quantity, TRANSACTION_TYPE.BUY);
@@ -79,19 +79,19 @@ export class TradingService {
     quantity: number
   ): Promise<Transaction> {
     // Obtener usuario
-    const user = storage.getUserById(userId);
+    const user = storage.users.getUserById(userId);
     if (!user) {
       throw new Error("Usuario no encontrado");
     }
 
     // Obtener activo
-    const asset = storage.getAssetBySymbol(symbol);
+    const asset = storage.assets.getAssetBySymbol(symbol);
     if (!asset) {
       throw new Error("Activo no encontrado");
     }
 
     // Verificar holdings suficientes
-    const portfolio = storage.getPortfolioByUserId(userId);
+    const portfolio = storage.portfolios.getPortfolioByUserId(userId);
     if (!portfolio) {
       throw new Error("Portafolio no encontrado");
     }
@@ -126,13 +126,13 @@ export class TradingService {
 
     // Actualizar balance del usuario
     user.addBalance(netAmount);
-    storage.updateUser(user);
+    storage.users.updateUser(user);
 
     // Actualizar portafolio
     this.updatePortfolioAfterSell(userId, symbol, quantity, executionPrice);
 
     // Guardar transacción
-    storage.addTransaction(transaction);
+    storage.transactions.addTransaction(transaction);
 
     // Simular volatilidad del mercado después de la operación
     this.simulateMarketImpact(symbol, quantity, TRANSACTION_TYPE.SELL);
@@ -157,7 +157,7 @@ export class TradingService {
     quantity: number,
     price: number
   ): void {
-    const portfolio = storage.getPortfolioByUserId(userId);
+    const portfolio = storage.portfolios.getPortfolioByUserId(userId);
     if (!portfolio) return;
 
     // Agregar las acciones al portafolio
@@ -166,7 +166,7 @@ export class TradingService {
     // Recalcular valores actuales
     this.recalculatePortfolioValues(portfolio);
 
-    storage.updatePortfolio(portfolio);
+    storage.portfolios.updatePortfolio(portfolio);
   }
 
   // Actualizar portafolio después de venta
@@ -176,7 +176,7 @@ export class TradingService {
     quantity: number,
     price: number
   ): void {
-    const portfolio = storage.getPortfolioByUserId(userId);
+    const portfolio = storage.portfolios.getPortfolioByUserId(userId);
     if (!portfolio) return;
 
     // Remover las acciones del portafolio
@@ -185,14 +185,14 @@ export class TradingService {
     // Recalcular valores actuales
     this.recalculatePortfolioValues(portfolio);
 
-    storage.updatePortfolio(portfolio);
+    storage.portfolios.updatePortfolio(portfolio);
   }
 
   // Recalcular valores del portafolio
   private recalculatePortfolioValues(portfolio: Portfolio): void {
     // Actualizar el valor actual de cada holding
     portfolio.holdings.forEach((holding) => {
-      const asset = storage.getAssetBySymbol(holding.symbol);
+      const asset = storage.assets.getAssetBySymbol(holding.symbol);
       if (asset) {
         holding.updateCurrentValue(asset.currentPrice);
       }
@@ -208,7 +208,7 @@ export class TradingService {
     quantity: number,
     action: TRANSACTION_TYPE
   ): void {
-    const marketData = storage.getMarketDataBySymbol(symbol);
+    const marketData = storage.marketData.getMarketDataBySymbol(symbol);
     if (!marketData) return;
 
     // Calcular impacto basado en volumen
@@ -229,14 +229,14 @@ export class TradingService {
     marketData.timestamp = new Date();
 
     // Actualizar asset también
-    const asset = storage.getAssetBySymbol(symbol);
+    const asset = storage.assets.getAssetBySymbol(symbol);
     if (asset) {
       asset.currentPrice = newPrice;
       asset.lastUpdated = new Date();
-      storage.updateAsset(asset);
+      storage.assets.updateAsset(asset);
     }
 
-    storage.updateMarketData(marketData);
+    storage.marketData.updateMarketData(marketData);
   }
 
   // Generar ID único para transacciones
@@ -246,6 +246,6 @@ export class TradingService {
 
   // Obtener historial de transacciones
   getTransactionHistory(userId: string): Transaction[] {
-    return storage.getTransactionsByUserId(userId);
+    return storage.transactions.getTransactionsByUserId(userId);
   }
 }

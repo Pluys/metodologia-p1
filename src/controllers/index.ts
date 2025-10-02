@@ -84,7 +84,7 @@ export class UserController {
       if (email) user.email = email;
       if (riskTolerance) user.riskTolerance = riskTolerance;
 
-      storage.updateUser(user);
+      storage.users.updateUser(user);
 
       res.json({
         message: "Perfil actualizado exitosamente",
@@ -109,7 +109,7 @@ export class UserController {
 export class MarketController {
   static async getPrices(req: Request, res: Response) {
     try {
-      const marketData = storage.getAllMarketData();
+      const marketData = storage.marketData.getAllMarketData();
 
       res.json({
         prices: marketData.map((data) => ({
@@ -133,7 +133,9 @@ export class MarketController {
   static async getPriceBySymbol(req: Request, res: Response) {
     try {
       const { symbol } = req.params;
-      const marketData = storage.getMarketDataBySymbol(symbol.toUpperCase());
+      const marketData = storage.marketData.getMarketDataBySymbol(
+        symbol.toUpperCase()
+      );
 
       if (!marketData) {
         return res.status(404).json({
@@ -182,7 +184,7 @@ export class TradingController {
       }
 
       // Verificar que el activo existe
-      const asset = storage.getAssetBySymbol(symbol.toUpperCase());
+      const asset = storage.assets.getAssetBySymbol(symbol.toUpperCase());
       if (!asset) {
         return res.status(404).json({
           error: "Activo no encontrado",
@@ -239,7 +241,7 @@ export class TradingController {
       }
 
       // Verificar que el activo existe
-      const asset = storage.getAssetBySymbol(symbol.toUpperCase());
+      const asset = storage.assets.getAssetBySymbol(symbol.toUpperCase());
       if (!asset) {
         return res.status(404).json({
           error: "Activo no encontrado",
@@ -306,7 +308,7 @@ export class PortfolioController {
   static async getPortfolio(req: Request, res: Response) {
     try {
       const user = req.user;
-      const portfolio = storage.getPortfolioByUserId(user.id);
+      const portfolio = storage.portfolios.getPortfolioByUserId(user.id);
 
       if (!portfolio) {
         return res.status(404).json({
@@ -336,7 +338,7 @@ export class PortfolioController {
   static async getPerformance(req: Request, res: Response) {
     try {
       const user = req.user;
-      const portfolio = storage.getPortfolioByUserId(user.id);
+      const portfolio = storage.portfolios.getPortfolioByUserId(user.id);
 
       if (!portfolio) {
         return res.status(404).json({
@@ -358,7 +360,7 @@ export class PortfolioController {
           sectors: [
             ...new Set(
               portfolio.holdings.map((h) => {
-                const asset = storage.getAssetBySymbol(h.symbol);
+                const asset = storage.assets.getAssetBySymbol(h.symbol);
                 return asset ? asset.sector : "Unknown";
               })
             ),
