@@ -1,6 +1,4 @@
 // Servicio de simulación de mercado
-import { MarketData } from "../models/market-data";
-import { Asset } from "../models/asset";
 import { storage } from "../utils/storage";
 import { config } from "../config/config";
 

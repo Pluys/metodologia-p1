@@ -49,7 +49,7 @@ Al crear una nueva clase que extienda de la abstracta, tendrá como variable el 
 ## COMMAND
 
 El patrón Command soluciona los distintos pedidos de peticiones de los usuarios (Ejemplo; Comprar, Vender) realizados a través de una función (function ManejarOrden(tipo)). (La función manualmente verifica el tipo de comando que es, similar al state)
-La manera en la que lo soluciona, es separando cada funcionalidad (Comprar y Vender) en su propio propio objeto, y que los objetos compartan, a través de una interfaz, un método, preferiblemente llamado "execute" o "run", para que la clase original llame a el método original (En este caso, ManejarOrden), y reciba el comando (El objeto) como parámetro, y que haga "orden.execute()", de esta manera, la función ManejarOrden es fácilmente extendible, respeta open/close principle, y modulariza el código.
+La manera en la que lo soluciona, es separando cada funcionalidad (Comprar y Vender) en su propio propio objeto, y que los objetos compartan, a través de una interfaz, un método, preferiblemente llamado "execute" o "run", para que la clase original llame a el método original (En este caso, ManejarOrden), y reciba el comando (El objeto) como parámetro, y que el objeto haga "orden.execute()", de esta manera, la función ManejarOrden es fácilmente extendible, respeta open/close principle, y modulariza el código.
 
 ## PROXY
 

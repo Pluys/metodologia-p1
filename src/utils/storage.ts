@@ -1,13 +1,4 @@
 // Almacenamiento en memoria
-import { User } from "../models/user";
-import { Asset } from "../models/asset";
-import { Transaction } from "../models/transaction";
-import { Order } from "../models/order";
-import { Portfolio } from "../models/portfolio";
-import { MarketData } from "../models/market-data";
-
-import { config } from "../config/config";
-import { RISK } from "../models/TYPES";
 import { transactionsF } from "./facade-models/transactions-f";
 import { usersF } from "./facade-models/users-f";
 import { assetsF } from "./facade-models/asssets-f";

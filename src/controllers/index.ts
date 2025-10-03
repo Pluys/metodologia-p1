@@ -5,11 +5,15 @@ import { MarketAnalysisService } from "../services/MarketAnalysisService";
 import { MarketSimulationService } from "../services/MarketSimulationService";
 import { storage } from "../utils/storage";
 import { RISK } from "../models/TYPES";
+import { BuyCommand } from "../services/pattern/command/buyCommand";
+import { SellCommand } from "../services/pattern/command/sellCommand";
 
 // Instancias de servicios - Candidato para Dependency Injection
 const tradingService = new TradingService();
 const analysisService = new MarketAnalysisService();
 const marketSimulation = new MarketSimulationService();
+const buyOrder = new BuyCommand();
+const sellOrder = new SellCommand();
 
 // Controlador de autenticación
 export class AuthController {
@@ -193,7 +197,8 @@ export class TradingController {
       }
 
       // Ejecutar orden de compra
-      const transaction = await tradingService.executeBuyOrder(
+      const transaction = await tradingService.executeOrder(
+        buyOrder,
         user.id,
         symbol.toUpperCase(),
         quantity
@@ -250,7 +255,8 @@ export class TradingController {
       }
 
       // Ejecutar orden de venta
-      const transaction = await tradingService.executeSellOrder(
+      const transaction = await tradingService.executeOrder(
+        sellOrder,
         user.id,
         symbol.toUpperCase(),
         quantity
